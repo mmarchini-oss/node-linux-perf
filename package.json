@@ -1,0 +1,27 @@
+{
+  "name": "linux-perf",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmarchini/node-linux-perf.git"
+  },
+  "keywords": [
+    "linux",
+    "perf"
+  ],
+  "author": "Matheus Marchini <matheusdot@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmarchini/node-linux-perf/issues"
+  },
+  "homepage": "https://github.com/mmarchini/node-linux-perf#readme",
+  "dependencies": {
+    "nan": "^2.10.0",
+    "node-gyp": "^3.6.2"
+  }
+}
