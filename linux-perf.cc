@@ -31,16 +31,28 @@ NAN_METHOD(LinuxPerf::New) {
 NAN_METHOD(LinuxPerf::Start) {
   Nan::HandleScope scope;
   LinuxPerf *linuxPerf = Nan::ObjectWrap::Unwrap<LinuxPerf>(info.Holder());
-  linuxPerf->handler = new LinuxPerfHandler(info.GetIsolate());
-  linuxPerf->handler->Enable();
+
+  if (linuxPerf->handler == nullptr) {
+    linuxPerf->handler = new LinuxPerfHandler(info.GetIsolate());
+    linuxPerf->handler->Enable();
+    info.GetReturnValue().Set(true);
+    return;
+  }
+  info.GetReturnValue().Set(false);
 }
 
 NAN_METHOD(LinuxPerf::Stop) {
   Nan::HandleScope scope;
   LinuxPerf *linuxPerf = Nan::ObjectWrap::Unwrap<LinuxPerf>(info.Holder());
 
-  linuxPerf->handler->Disable();
-  delete linuxPerf->handler;
+  if (linuxPerf->handler != nullptr) {
+    linuxPerf->handler->Disable();
+    delete linuxPerf->handler;
+    linuxPerf->handler = nullptr;
+    info.GetReturnValue().Set(true);
+    return;
+  }
+  info.GetReturnValue().Set(false);
 }
 
 extern "C" void
