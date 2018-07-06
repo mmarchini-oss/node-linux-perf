@@ -9,13 +9,13 @@ creation of Linux `perf` map files during runtime.
 |---------|-------------------------|-------------------------|-------------------------|---------------------------|-------------------------------|----------------------------------|
 | **Trusty**  | [![v6.x badge][v6-badge]][travis] | [![v8.x badge][v8-badge]][travis] | [![v9.x badge][v9-badge]][travis] | [![v10.x badge][v10-badge]][travis] | [![master badge][master-badge]][travis] | [![v8-canary badge][canary-badge]][travis] |
 
-[travis]: https://travis-ci.org/nodejs/llnode
+[travis]: https://travis-ci.com/mmarchini/node-linux-perf
 [v6-badge]: https://img.shields.io/badge/build-unsupported-lightgrey.svg
 [v8-badge]: https://img.shields.io/badge/build-unsupported-lightgrey.svg
 [v9-badge]: https://img.shields.io/badge/build-unsupported-lightgrey.svg
-[v10-badge]: https://travis-matrix-badges.herokuapp.com/repos/nodejs/llnode/branches/master/1?use_travis_com=true
-[master-badge]: https://travis-matrix-badges.herokuapp.com/repos/nodejs/llnode/branches/master/2?use_travis_com=true
-[canary-badge]: https://travis-matrix-badges.herokuapp.com/repos/nodejs/llnode/branches/master/3?use_travis_com=true
+[v10-badge]: https://travisci-matrix-badges.herokuapp.com/repos/mmarchini/node-linux-perf/branches/master/1?use_travis_com=true
+[master-badge]: https://travisci-matrix-badges.herokuapp.com/repos/mmarchini/node-linux-perf/branches/master/2?use_travis_com=true
+[canary-badge]: https://travisci-matrix-badges.herokuapp.com/repos/mmarchini/node-linux-perf/branches/master/3?use_travis_com=true
 
 ## Installation
 
