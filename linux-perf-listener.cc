@@ -13,10 +13,10 @@ namespace node {
 void write_to_file(LinuxPerfHandler* handler) {
 
   while(handler->IsAlive()) {
-    std::cout << "Inside thread" << std::endl;
-    std::vector<std::string> arr = handler->GetBufferElements(10);
+    // std::cout << "Inside thread" << std::endl;
+    std::vector<std::string> arr = handler->GetBufferElements(100);
     if (arr.size() > 0 ) {
-      std::cout << "Writing to file:" << std::endl;
+      // std::cout << "Writing to file:" << std::endl;
       for(uint i = 0; i < arr.size(); i++) {
         *(handler->GetFile()) << arr[i];
       }
@@ -60,7 +60,7 @@ std::string LinuxPerfHandler::FormatName(v8::CodeEvent* code_event) {
 }
 
 void LinuxPerfHandler::Handle(v8::CodeEvent* code_event) {
-  std::cout << "Handling event" << std::endl;
+  // std::cout << "Handling event" << std::endl;
   codeEventStream << std::hex << code_event->GetCodeStartAddress() << " "
           << std::hex << code_event->GetCodeSize() << " "
           << v8::CodeEvent::GetCodeEventTypeName(code_event->GetCodeType())
