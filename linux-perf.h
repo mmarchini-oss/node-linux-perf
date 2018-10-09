@@ -10,7 +10,7 @@
 #include <string>
 #include <sstream>
 #include <thread>
-
+#include <mutex>
 
 namespace node {
 
@@ -24,6 +24,7 @@ class LinuxPerfHandler : public v8::CodeEventHandler {
   std::vector<std::string> GetBufferElements(int n) {
     int count = 0;
     std::vector<std::string> values;
+    std::lock_guard<std::mutex> lock(mutex_);
     while(count < n && !buffer.empty()) {
       values.push_back(buffer.front());
       buffer.pop();
@@ -47,6 +48,7 @@ class LinuxPerfHandler : public v8::CodeEventHandler {
   std::queue<std::string> buffer;
   std::stringstream codeEventStream;
   std::string FormatName(v8::CodeEvent* code_event);
+  std::mutex mutex_;
 };
 
 class LinuxPerf : public Nan::ObjectWrap {
