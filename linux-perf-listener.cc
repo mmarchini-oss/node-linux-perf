@@ -22,12 +22,14 @@ std::string LinuxPerfHandler::FormatName(v8::CodeEvent* code_event) {
   char buffer[1000];
   std::ostringstream formattedName;
 
+  v8::Isolate* isolate = v8::Isolate::GetCurrent();
+
   auto functionName = code_event->GetFunctionName();
-  functionName->WriteUtf8(buffer, 1000);
+  functionName->WriteUtf8(isolate, buffer, 1000);
   formattedName << buffer;
 
   auto scriptName = code_event->GetScriptName();
-  scriptName->WriteUtf8(buffer, 1000);
+  scriptName->WriteUtf8(isolate, buffer, 1000);
   if(buffer[0] != '\0') {
     formattedName << " " << buffer << ":" << code_event->GetScriptLine();
   }

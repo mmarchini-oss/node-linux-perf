@@ -16,7 +16,7 @@ void LinuxPerf::Initialize(v8::Local<v8::Object> target) {
   Nan::SetPrototypeMethod(t, "start", LinuxPerf::Start);
   Nan::SetPrototypeMethod(t, "stop", LinuxPerf::Stop);
 
-  target->Set(className, t->GetFunction());
+  Nan::Set(target, className, Nan::GetFunction(t).ToLocalChecked());
 }
 
 NAN_METHOD(LinuxPerf::New) {

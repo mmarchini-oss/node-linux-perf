@@ -4,7 +4,7 @@
   "description": "",
   "main": "linux-perf.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "./test.sh"
   },
   "repository": {
     "type": "git",
