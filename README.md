@@ -3,19 +3,26 @@
 Library to replace V8's `--perf-basic-prof` flag, with the ability to toggle
 creation of Linux `perf` map files during runtime.
 
+It's recommended to run Node.js with the `--interpreted-frames-native-stack`
+flag enabled, otherwise Linux perf will not be able to translate the name of
+many JavaScript functions.
+
 ## Build Status
 
-| Version | v6.x                    | v8.x                    | v9.x                    | v10.x                     | master                        | v8-canary                        |
-|---------|-------------------------|-------------------------|-------------------------|---------------------------|-------------------------------|----------------------------------|
-| **Trusty**  | [![v6.x badge][v6-badge]][travis] | [![v8.x badge][v8-badge]][travis] | [![v9.x badge][v9-badge]][travis] | [![v10.x badge][v10-badge]][travis] | [![master badge][master-badge]][travis] | [![v8-canary badge][canary-badge]][travis] |
+| Version               | Status                                     |
+|-----------------------|--------------------------------------------|
+| Node.js v10.x         | [![v10.x badge][v10-badge]][travis]        |
+| Node.js v12.x         | [![v12.x badge][v12-badge]][travis]        |
+| nodejs/node@master    | [![master badge][master-badge]][travis]    |
+| nodejs/node-v8@canary | [![v8-canary badge][canary-badge]][travis] |
 
 [travis]: https://travis-ci.com/mmarchini/node-linux-perf
-[v6-badge]: https://img.shields.io/badge/build-unsupported-lightgrey.svg
-[v8-badge]: https://img.shields.io/badge/build-unsupported-lightgrey.svg
-[v9-badge]: https://img.shields.io/badge/build-unsupported-lightgrey.svg
+[master]: https://github.com/nodejs/node/tree/master
+[canary]: https://github.com/nodejs/node-v8/tree/canary
 [v10-badge]: https://travisci-matrix-badges.herokuapp.com/repos/mmarchini/node-linux-perf/branches/master/1?use_travis_com=true
-[master-badge]: https://travisci-matrix-badges.herokuapp.com/repos/mmarchini/node-linux-perf/branches/master/2?use_travis_com=true
-[canary-badge]: https://travisci-matrix-badges.herokuapp.com/repos/mmarchini/node-linux-perf/branches/master/3?use_travis_com=true
+[v12-badge]: https://travisci-matrix-badges.herokuapp.com/repos/mmarchini/node-linux-perf/branches/master/2?use_travis_com=true
+[master-badge]: https://travisci-matrix-badges.herokuapp.com/repos/mmarchini/node-linux-perf/branches/master/3?use_travis_com=true
+[canary-badge]: https://travisci-matrix-badges.herokuapp.com/repos/mmarchini/node-linux-perf/branches/master/4?use_travis_com=true
 
 ## Installation
 
