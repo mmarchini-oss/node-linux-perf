@@ -2,8 +2,7 @@
 #define __LINUX_PERF_H
 
 #include "v8-profiler.h"
-#include <nan.h>
-#include <node_object_wrap.h>
+#include <napi.h>
 #include <fstream>
 
 
@@ -21,18 +20,17 @@ class LinuxPerfHandler : public v8::CodeEventHandler {
   std::string FormatName(v8::CodeEvent* code_event);
 };
 
-class LinuxPerf : public Nan::ObjectWrap {
+class LinuxPerf : public Napi::ObjectWrap<LinuxPerf> {
  public:
-  static void Initialize(v8::Local<v8::Object> target);
+  explicit LinuxPerf(const Napi::CallbackInfo& info);
+  ~LinuxPerf();
 
-  static NAN_METHOD(New);
-  static NAN_METHOD(Start);
-  static NAN_METHOD(Stop);
+  static void Initialize(Napi::Env env, Napi::Object exports);
+
+  Napi::Value Start(const Napi::CallbackInfo& info);
+  Napi::Value Stop(const Napi::CallbackInfo& info);
 
   LinuxPerfHandler* handler;
-
-  LinuxPerf() = default;
-  ~LinuxPerf() = default;
 };
 
 };

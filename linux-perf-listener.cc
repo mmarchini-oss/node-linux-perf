@@ -1,4 +1,5 @@
 #include <sstream>
+#include <uv.h>
 
 #include "linux-perf.h"
 
