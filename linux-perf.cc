@@ -1,65 +1,55 @@
-#include <nan.h>
+#include <napi.h>
+#include <v8.h>
 
 #include "linux-perf.h"
 
 namespace node {
 
-void LinuxPerf::Initialize(v8::Local<v8::Object> target) {
-  Nan::HandleScope scope;
-  auto className = Nan::New<v8::String>("LinuxPerf").ToLocalChecked();
+void LinuxPerf::Initialize(Napi::Env env, Napi::Object exports) {
+  Napi::HandleScope scope(env);
 
-  v8::Local<v8::FunctionTemplate> t =
-      Nan::New<v8::FunctionTemplate>(LinuxPerf::New);
-  t->InstanceTemplate()->SetInternalFieldCount(1);
-  t->SetClassName(className);
+  Napi::Function func = DefineClass(env, "LinuxPerf", {
+    InstanceMethod("start", &LinuxPerf::Start),
+    InstanceMethod("stop", &LinuxPerf::Stop)
+  });
 
-  Nan::SetPrototypeMethod(t, "start", LinuxPerf::Start);
-  Nan::SetPrototypeMethod(t, "stop", LinuxPerf::Stop);
-
-  Nan::Set(target, className, Nan::GetFunction(t).ToLocalChecked());
+  exports.Set("LinuxPerf", func);
 }
 
-NAN_METHOD(LinuxPerf::New) {
-  Nan::HandleScope scope;
-  LinuxPerf *linuxPerf = new LinuxPerf();
-  linuxPerf->handler = nullptr;
-  linuxPerf->Wrap(info.This());
-
-  info.GetReturnValue().Set(info.This());
+LinuxPerf::LinuxPerf(const Napi::CallbackInfo& info) : Napi::ObjectWrap<LinuxPerf>(info){
+  handler = nullptr;
 }
 
-NAN_METHOD(LinuxPerf::Start) {
-  Nan::HandleScope scope;
-  LinuxPerf *linuxPerf = Nan::ObjectWrap::Unwrap<LinuxPerf>(info.Holder());
+Napi::Value LinuxPerf::Start(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
 
-  if (linuxPerf->handler == nullptr) {
-    linuxPerf->handler = new LinuxPerfHandler(info.GetIsolate());
-    linuxPerf->handler->Enable();
-    info.GetReturnValue().Set(true);
-    return;
+  if (handler == nullptr) {
+    handler = new LinuxPerfHandler(v8::Isolate::GetCurrent());
+    handler->Enable();
+    return Napi::Boolean::New(env, true);
   }
-  info.GetReturnValue().Set(false);
+  return Napi::Boolean::New(env, false);
 }
 
-NAN_METHOD(LinuxPerf::Stop) {
-  Nan::HandleScope scope;
-  LinuxPerf *linuxPerf = Nan::ObjectWrap::Unwrap<LinuxPerf>(info.Holder());
+Napi::Value LinuxPerf::Stop(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
 
-  if (linuxPerf->handler != nullptr) {
-    linuxPerf->handler->Disable();
-    delete linuxPerf->handler;
-    linuxPerf->handler = nullptr;
-    info.GetReturnValue().Set(true);
-    return;
+  if (handler != nullptr) {
+    handler->Disable();
+    delete handler;
+    handler = nullptr;
+    return Napi::Boolean::New(env, true);
   }
-  info.GetReturnValue().Set(false);
+  return Napi::Boolean::New(env, false);
 }
 
-extern "C" void
-init(v8::Local<v8::Object> target) {
-  LinuxPerf::Initialize(target);
+Napi::Object init(Napi::Env env, Napi::Object exports) {
+  LinuxPerf::Initialize(env, exports);
+  return exports;
 }
 
-NODE_MODULE(LiuxPerfBindings, init)
+NODE_API_MODULE(LiuxPerfBindings, init)
 
 };
