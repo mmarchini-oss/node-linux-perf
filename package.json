@@ -21,8 +21,7 @@
   },
   "homepage": "https://github.com/mmarchini/node-linux-perf#readme",
   "dependencies": {
-    "nan": "^2.10.0",
-    "node-gyp": "^4.0.0"
+    "nan": "^2.10.0"
   },
   "devDependencies": {
     "clang-format": "^1.2.3",
