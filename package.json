@@ -14,7 +14,7 @@
     "linux",
     "perf"
   ],
-  "author": "Matheus Marchini <matheusdot@gmail.com>",
+  "author": "Mary Marchini <oss@mmarchini.me>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mmarchini/node-linux-perf/issues"
